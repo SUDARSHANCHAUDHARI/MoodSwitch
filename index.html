@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="MoodSwitch is an interactive room where one unreliable wall switch controls everything except the ceiling light."
+    />
+    <meta name="theme-color" content="#0b1014" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="MoodSwitch — The wrong switch for the right light" />
+    <meta
+      property="og:description"
+      content="An interactive room where one unreliable wall switch controls everything except the ceiling light."
+    />
+    <meta name="twitter:card" content="summary" />
+    <title>MoodSwitch — The wrong switch for the right light</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#wall-switch">Skip to the switch</a>
+
+    <div class="app-shell">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">Apartment 6B · Unreliable since 1974</p>
+          <h1>Mood<span>Switch</span></h1>
+        </div>
+        <p class="masthead-note">
+          One switch. One ceiling light.<br />Absolutely no cooperation.
+        </p>
+      </header>
+
+      <main>
+        <section class="experience" aria-labelledby="room-heading">
+          <h2 class="visually-hidden" id="room-heading">The unreliable room</h2>
+
+          <figure class="room-frame" id="room-frame" data-state="idle">
+            <div class="room-transform" id="room-transform">
+              <svg
+                id="room-scene"
+                viewBox="0 0 1200 720"
+                role="img"
+                aria-labelledby="scene-title scene-description"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <title id="scene-title">A dark, furnished room with a wall switch</title>
+                <desc id="scene-description">
+                  A ceiling bulb hangs above a worn living room. There is a moonlit window,
+                  a table lamp, a sofa, tables, books, framed art, and a suspicious wall switch.
+                </desc>
+
+                <defs>
+                  <linearGradient id="wall-gradient" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#31535a" />
+                    <stop offset="0.58" stop-color="#29484f" />
+                    <stop offset="1" stop-color="#1d343b" />
+                  </linearGradient>
+                  <linearGradient id="floor-gradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#2b2725" />
+                    <stop offset="1" stop-color="#131517" />
+                  </linearGradient>
+                  <linearGradient id="window-sky" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#101b37" />
+                    <stop offset="1" stop-color="#29456c" />
+                  </linearGradient>
+                  <linearGradient id="moon-ray" x1="1" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#d7e8ff" stop-opacity="0.7" />
+                    <stop offset="1" stop-color="#83b6e8" stop-opacity="0" />
+                  </linearGradient>
+                  <radialGradient id="ceiling-light-gradient">
+                    <stop offset="0" stop-color="#fff4bc" stop-opacity="0.72" />
+                    <stop offset="0.38" stop-color="#f9c55d" stop-opacity="0.28" />
+                    <stop offset="1" stop-color="#f5b441" stop-opacity="0" />
+                  </radialGradient>
+                  <radialGradient id="lamp-light-gradient">
+                    <stop offset="0" stop-color="#ffbd57" stop-opacity="0.62" />
+                    <stop offset="1" stop-color="#f27b35" stop-opacity="0" />
+                  </radialGradient>
+                  <radialGradient id="fish-gradient">
+                    <stop offset="0" stop-color="#bdfaff" />
+                    <stop offset="0.55" stop-color="#50d4e5" />
+                    <stop offset="1" stop-color="#108eaa" />
+                  </radialGradient>
+                  <pattern id="wallpaper" width="70" height="70" patternUnits="userSpaceOnUse">
+                    <path d="M35 0v70M0 35h70" stroke="#c7ddce" stroke-opacity="0.035" />
+                    <circle cx="35" cy="35" r="2" fill="#c7ddce" fill-opacity="0.07" />
+                  </pattern>
+                  <pattern id="floorboards" width="170" height="60" patternUnits="userSpaceOnUse">
+                    <path d="M0 0h170M0 60h170M85 0v60" stroke="#b78763" stroke-opacity="0.1" />
+                  </pattern>
+                  <filter id="soft-glow" x="-80%" y="-80%" width="260%" height="260%">
+                    <feGaussianBlur stdDeviation="16" result="blur" />
+                    <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                  </filter>
+                  <filter id="small-glow" x="-80%" y="-80%" width="260%" height="260%">
+                    <feGaussianBlur stdDeviation="5" result="blur" />
+                    <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                  </filter>
+                  <filter id="room-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#050708" flood-opacity="0.5" />
+                  </filter>
+                  <mask id="everything-mask">
+                    <rect width="1200" height="720" fill="white" />
+                    <circle cx="600" cy="125" r="95" fill="black" />
+                  </mask>
+                  <clipPath id="window-clip">
+                    <rect x="770" y="104" width="282" height="224" rx="3" />
+                  </clipPath>
+                </defs>
+
+                <g id="room-art">
+                  <rect width="1200" height="510" fill="url(#wall-gradient)" />
+                  <rect width="1200" height="510" fill="url(#wallpaper)" />
+                  <path d="M0 500H1200V720H0Z" fill="url(#floor-gradient)" />
+                  <path d="M0 500H1200V720H0Z" fill="url(#floorboards)" />
+                  <rect y="490" width="1200" height="18" fill="#15252a" />
+                  <path d="M0 507h1200" stroke="#6b8583" stroke-opacity="0.22" stroke-width="3" />
+
+                  <g id="window" class="decor-object" filter="url(#room-shadow)">
+                    <rect x="754" y="88" width="314" height="256" rx="6" fill="#17272c" />
+                    <rect x="770" y="104" width="282" height="224" fill="url(#window-sky)" />
+                    <g clip-path="url(#window-clip)">
+                      <circle cx="975" cy="158" r="42" fill="#dcecff" />
+                      <circle cx="957" cy="144" r="6" fill="#b8cee4" opacity="0.35" />
+                      <circle cx="992" cy="172" r="9" fill="#b8cee4" opacity="0.28" />
+                      <g fill="#d5edff">
+                        <circle cx="810" cy="140" r="2" /><circle cx="866" cy="178" r="1.5" />
+                        <circle cx="916" cy="122" r="1.5" /><circle cx="1024" cy="217" r="2" />
+                        <circle cx="842" cy="245" r="1.5" /><circle cx="934" cy="279" r="1" />
+                      </g>
+                      <path d="M770 300L814 258l43 25 53-55 57 62 42-31 43 42v27H770Z" fill="#14233a" />
+                      <path d="M770 318l66-39 54 24 67-35 95 48v12H770Z" fill="#0c1729" />
+                    </g>
+                    <path d="M911 104v224M770 216h282" stroke="#263e43" stroke-width="12" />
+                    <path d="M911 104v224M770 216h282" stroke="#8da09a" stroke-opacity="0.18" stroke-width="3" />
+                    <path d="M742 76h338" stroke="#151f21" stroke-width="14" stroke-linecap="round" />
+                    <path d="M770 88c-23 42-31 164-13 277h54c-18-106-16-201 14-277Z" fill="#7d443d" />
+                    <path d="M1052 88c23 42 31 164 13 277h-54c18-106 16-201-14-277Z" fill="#7d443d" />
+                    <path d="M782 95c-13 94-14 183 2 258M1040 95c13 94 14 183-2 258" fill="none" stroke="#b36b53" stroke-opacity="0.3" stroke-width="7" />
+                  </g>
+
+                  <g class="decor-object" id="wall-art">
+                    <g transform="translate(95 98) rotate(-2)">
+                      <rect width="196" height="126" rx="2" fill="#172428" filter="url(#room-shadow)" />
+                      <rect x="12" y="12" width="172" height="102" fill="#bc925e" />
+                      <circle cx="75" cy="58" r="28" fill="#c04f45" />
+                      <path d="M18 101l46-41 35 29 27-53 53 65Z" fill="#345a57" />
+                    </g>
+                    <g transform="translate(346 87) rotate(1)">
+                      <rect width="120" height="155" fill="#1a292c" filter="url(#room-shadow)" />
+                      <rect x="10" y="10" width="100" height="135" fill="#dbcfb1" />
+                      <path d="M32 121c8-61 22-88 28-88s19 27 28 88" fill="none" stroke="#7e3e39" stroke-width="10" />
+                      <circle cx="60" cy="67" r="13" fill="#395d5c" />
+                    </g>
+                    <text x="159" y="263" fill="#b8cebf" fill-opacity="0.28" font-family="monospace" font-size="13" letter-spacing="2">DON'T EXPECT MUCH</text>
+                  </g>
+
+                  <g id="ceiling-fixture">
+                    <path d="M600 0v79" stroke="#171b1b" stroke-width="7" />
+                    <path d="M556 94q44-35 88 0l16 19H540Z" fill="#26383a" />
+                    <path d="M546 108h108" stroke="#0e1617" stroke-width="7" stroke-linecap="round" />
+                    <g id="ceiling-bulb">
+                      <path d="M576 111c0 26 10 38 17 48h14c8-10 17-22 17-48 0-16-11-27-24-27s-24 11-24 27Z" fill="#b8b498" stroke="#e0d9b3" stroke-opacity="0.4" stroke-width="3" />
+                      <path d="M589 159h22v8h-22zm2 10h18v7h-18z" fill="#5e625b" />
+                      <path d="M589 113c4 9 7 12 11 20 3-8 7-11 11-20" fill="none" stroke="#675e4c" stroke-width="2" />
+                    </g>
+                  </g>
+
+                  <g id="bookcase" class="furniture" transform="translate(34 300)" filter="url(#room-shadow)">
+                    <path d="M0 0h126v292H0Z" fill="#2e2622" />
+                    <path d="M10 14h106v263H10Z" fill="#171b1b" />
+                    <path d="M5 91h116M5 179h116M5 267h116" stroke="#49372d" stroke-width="10" />
+                    <g class="books">
+                      <path d="M18 35h14v51H18zm17 9h18v42H35z" fill="#a4584d" />
+                      <path d="M56 29h12v57H56zm15 18h22v39H71zm25-12h10v51H96z" fill="#687f63" />
+                      <path d="M19 119h21v55H19zm24 12h13v43H43zm16-18h17v61H59z" fill="#b5864c" />
+                      <path d="M80 125h26v49H80zM20 209h12v53H20zm15-7h20v60H35z" fill="#63566d" />
+                      <path d="M60 220h20v42H60zm23-13h22v55H83z" fill="#8c4842" />
+                    </g>
+                  </g>
+
+                  <g id="sofa" class="furniture" filter="url(#room-shadow)">
+                    <path d="M256 452q0-54 45-54h293q45 0 45 54v137H256Z" fill="#435d5a" />
+                    <path d="M281 424h151v105H281q-17 0-17-17v-71q0-17 17-17Zm177 0h151q17 0 17 17v71q0 17-17 17H458Z" fill="#58736c" stroke="#2d4846" stroke-width="7" />
+                    <path d="M245 474q0-21 21-21h30q16 0 16 16v114h-67Zm340-5q0-16 16-16h30q21 0 21 21v109h-67Z" fill="#354d4b" />
+                    <path d="M286 589h28v28h-28zm298 0h28v28h-28z" fill="#191d1d" />
+                    <path d="M332 439q30-18 63 0l-8 64h-61Z" fill="#a95f4f" />
+                    <path d="M491 444q29-20 61-2l11 61h-79Z" fill="#b99b5f" />
+                  </g>
+
+                  <g id="side-table" class="furniture" transform="translate(687 440)" filter="url(#room-shadow)">
+                    <path d="M0 81h163v20H0Z" fill="#4b3428" />
+                    <path d="M17 101h16v94H17zm113 0h16v94h-16z" fill="#33251f" />
+                    <g id="table-lamp">
+                      <path d="M81 3v78" stroke="#332921" stroke-width="8" />
+                      <path d="M52 82h58" stroke="#332921" stroke-width="12" stroke-linecap="round" />
+                      <path d="M48 9h66l18 50H30Z" fill="#9e5e42" stroke="#c07a55" stroke-opacity="0.42" stroke-width="3" />
+                      <path d="M37 55h88" stroke="#4b3028" stroke-width="7" />
+                    </g>
+                    <g class="decor-object" transform="translate(122 51)">
+                      <rect width="25" height="31" rx="2" fill="#c9b887" />
+                      <circle cx="12.5" cy="15" r="7" fill="#344f50" />
+                    </g>
+                  </g>
+
+                  <g id="coffee-table" class="furniture" filter="url(#room-shadow)">
+                    <ellipse cx="500" cy="616" rx="206" ry="42" fill="#121616" opacity="0.5" />
+                    <path d="M350 565h310l-24 67H375Z" fill="#4a3428" />
+                    <path d="M366 553h278q18 0 18 13t-18 13H366q-18 0-18-13t18-13Z" fill="#72503b" />
+                    <path d="M390 627h18v59h-18zm202 0h18v59h-18z" fill="#261f1b" />
+                    <g class="decor-object">
+                      <path d="M450 531h73v12h-73z" fill="#a95045" />
+                      <path d="M458 518h81v13h-81z" fill="#5b776b" />
+                      <path d="M468 505h65v13h-65z" fill="#bd9257" />
+                      <path d="M565 500h35l-4 52h-27Z" fill="#27494a" />
+                      <path d="M572 501q10-24 11-43m7 43q-2-27 14-43m-28 43q-11-27-23-32" fill="none" stroke="#6d8d69" stroke-width="6" stroke-linecap="round" />
+                    </g>
+                  </g>
+
+                  <g id="plant" class="decor-object" transform="translate(1020 377)" filter="url(#room-shadow)">
+                    <path d="M35 119h88l-12 105H49Z" fill="#7a4837" />
+                    <path d="M42 122h74" stroke="#b47450" stroke-width="10" stroke-linecap="round" />
+                    <path d="M78 119V24M78 86Q43 38 22 42M81 75q39-52 67-43M79 98q-44-30-66-12m68 11q35-28 61-12" fill="none" stroke="#5d8165" stroke-width="9" stroke-linecap="round" />
+                    <ellipse cx="25" cy="41" rx="27" ry="13" transform="rotate(28 25 41)" fill="#6f9874" />
+                    <ellipse cx="143" cy="31" rx="31" ry="14" transform="rotate(-30 143 31)" fill="#70916e" />
+                    <ellipse cx="16" cy="86" rx="26" ry="12" transform="rotate(15 16 86)" fill="#52755d" />
+                    <ellipse cx="144" cy="85" rx="28" ry="13" transform="rotate(-17 144 85)" fill="#527b63" />
+                  </g>
+
+                  <g class="decor-object" id="clock" transform="translate(1090 130)">
+                    <circle r="48" fill="#172427" stroke="#af8c5c" stroke-width="7" />
+                    <circle r="35" fill="#d1c8aa" />
+                    <path d="M0 0V-22M0 0l17 11" stroke="#4c3c32" stroke-width="4" stroke-linecap="round" />
+                    <circle r="4" fill="#4c3c32" />
+                  </g>
+                </g>
+
+                <rect class="darkness-overlay" width="1200" height="720" fill="#04080c" />
+
+                <g id="lighting-layers" pointer-events="none">
+                  <ellipse class="ceiling-glow" cx="600" cy="260" rx="405" ry="325" fill="url(#ceiling-light-gradient)" />
+                  <path class="ceiling-cone" d="M560 122 256 720h688L640 122Z" fill="#ffe49a" />
+                  <path class="moon-beam" d="M770 106 1050 106 742 720 282 720Z" fill="url(#moon-ray)" />
+                  <ellipse class="table-lamp-glow" cx="768" cy="502" rx="230" ry="210" fill="url(#lamp-light-gradient)" />
+                  <rect class="red-wash" width="1200" height="720" fill="#e31e36" />
+                  <rect class="everything-wash" width="1200" height="720" fill="#f6d44e" mask="url(#everything-mask)" />
+                  <g class="disco-layer" opacity="0">
+                    <path class="disco-beam beam-a" d="M600 0 225 720H50L520 0Z" fill="#ff2c76" />
+                    <path class="disco-beam beam-b" d="M612 0 875 720h180L680 0Z" fill="#28dbff" />
+                    <path class="disco-beam beam-c" d="M570 0 470 720h190L630 0Z" fill="#ffe438" />
+                    <circle cx="180" cy="160" r="44" fill="#ff4ea0" />
+                    <circle cx="990" cy="395" r="57" fill="#32e2ff" />
+                    <circle cx="712" cy="566" r="35" fill="#faff53" />
+                  </g>
+                  <path class="bulb-lit-fill" d="M576 111c0 26 10 38 17 48h14c8-10 17-22 17-48 0-16-11-27-24-27s-24 11-24 27Z" fill="#fffbd5" filter="url(#small-glow)" />
+                </g>
+
+                <g id="ghost" pointer-events="none">
+                  <path d="M0-83c-49 0-78 42-78 93v94l25-22 25 22L0 82l28 22 25-22 25 22V10C78-41 49-83 0-83Z" fill="#d9fff0" />
+                  <ellipse cx="-25" cy="-18" rx="9" ry="14" fill="#2a5b57" />
+                  <ellipse cx="25" cy="-18" rx="9" ry="14" fill="#2a5b57" />
+                  <path d="M-20 20q20 18 40 0" fill="none" stroke="#2a5b57" stroke-width="7" stroke-linecap="round" />
+                  <path d="M-73 4q-58 7-76 47" fill="none" stroke="#d9fff0" stroke-width="16" stroke-linecap="round" />
+                </g>
+
+                <g id="glowing-fish" pointer-events="none" filter="url(#soft-glow)">
+                  <path d="M566 124q32-37 75 0-43 37-75 0Z" fill="url(#fish-gradient)" />
+                  <path d="m566 124-29-25v50Z" fill="#44cad9" />
+                  <circle cx="626" cy="116" r="4" fill="#082d3c" />
+                  <path d="M589 103q12-21 26-1m-22 43q14 18 27-2" fill="#68edec" />
+                </g>
+              </svg>
+
+              <button
+                class="wall-switch"
+                id="wall-switch"
+                type="button"
+                aria-label="Operate the unreliable wall switch"
+                aria-describedby="switch-instructions effect-name"
+                aria-pressed="false"
+              >
+                <span class="switch-screw" aria-hidden="true"></span>
+                <span class="switch-toggle" aria-hidden="true"><span></span></span>
+                <span class="switch-screw" aria-hidden="true"></span>
+              </button>
+            </div>
+
+            <div class="atmosphere" aria-hidden="true"></div>
+            <figcaption class="room-console">
+              <div class="state-readout">
+                <span class="state-led" aria-hidden="true"></span>
+                <span id="state-label">System idle</span>
+              </div>
+              <div class="effect-copy">
+                <p id="effect-name" class="effect-name" role="status" aria-live="polite">
+                  Dark. Suspiciously dark.
+                </p>
+                <p id="effect-detail" class="effect-detail">The ceiling bulb is refusing eye contact.</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <div class="control-deck" aria-label="Room controls and attempt count">
+            <div class="attempt-panel">
+              <p class="panel-label">Switch attempts</p>
+              <output id="attempt-count" class="attempt-count" aria-label="0 attempts">00</output>
+              <div class="attempt-cycle">
+                <progress id="attempt-progress" max="10" value="0">0 out of 10</progress>
+                <span id="cycle-label">10 tries until guaranteed competence</span>
+              </div>
+            </div>
+
+            <p class="instructions" id="switch-instructions">
+              Click the switch or focus it and press <kbd>Space</kbd>. Every tenth attempt works
+              for three glorious seconds.
+            </p>
+
+            <div class="utility-controls">
+              <button class="utility-button" id="sound-toggle" type="button" aria-pressed="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 9v6h4l5 4V5L8 9H4Zm13.5 3a4.5 4.5 0 0 0-2.2-3.9v7.8a4.5 4.5 0 0 0 2.2-3.9Z" />
+                  <path class="sound-wave" d="M18 5.5a8 8 0 0 1 0 13" fill="none" />
+                </svg>
+                <span id="sound-label">Sound on</span>
+              </button>
+              <button class="utility-button" id="reset-button" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M19 7v5h-5M5.6 17.2A8 8 0 1 0 5 7l-2 2" fill="none" />
+                </svg>
+                Reset room
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>Wiring diagram unavailable.</p>
+        <p class="footer-warning"><span aria-hidden="true">⚡</span> Do not encourage the switch.</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

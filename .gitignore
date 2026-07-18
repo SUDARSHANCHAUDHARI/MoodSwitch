@@ -1,0 +1,38 @@
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local tooling and logs
+node_modules/
+dist/
+coverage/
+.cache/
+.tmp/
+*.log
+*.tsbuildinfo
+
+# Hosting provider state
+.vercel/
+.netlify/
+.firebase/
+
+# Local environment, credentials, and signing material
+.env
+.env.*
+!.env.example
+local.properties
+*.key
+*.pem
+*.p12
+*.jks
+*.keystore
+*.sqlite
+*.sqlite3
+
+# Generated local knowledge views
+_Graphify/
+_RepoMem/
