@@ -1,70 +1,196 @@
 # MoodSwitch
 
-MoodSwitch is a standalone interactive room where one wall switch controls everything except the ceiling light. Each attempt triggers a random lighting mishap, spatial anomaly, ghost intervention, or an extremely rare moment of electrical competence.
+> One switch. One ceiling light. Absolutely no cooperation.
+
+MoodSwitch is a standalone interactive web experience set inside an unreliable apartment room. Operating the wall switch triggers lighting mistakes, spatial anomalies, ghost interference, or—very rarely—the correct ceiling light.
+
+The project is built entirely with semantic HTML, CSS, inline SVG, and vanilla JavaScript. It has no runtime packages, remote assets, backend, account system, or build step.
+
+## Project status
+
+- **Readiness:** Production-ready static site
+- **Repository:** Private
+- **Default branch:** `main`
+- **Deployment:** Not publicly deployed
+- **Runtime dependencies:** None
+- **Automated verification:** 11 dependency-free checks
+
+## Features
+
+- Responsive illustrated room containing a ceiling bulb, wall switch, window, table lamp, furniture, plants, books, artwork, and decorative objects.
+- Native HTML switch control layered over the SVG scene for dependable mouse, touch, keyboard, and screen-reader operation.
+- Ten randomized failure outcomes:
+
+  | Outcome | Room response |
+  | --- | --- |
+  | Emergency red | The entire room becomes red. |
+  | Disco protocol | Colored beams and disco lights animate across the room. |
+  | Wrong lamp | The table lamp turns on instead of the ceiling bulb. |
+  | Moon shift | Moonlight enters through the window. |
+  | Bulb negotiation | The ceiling bulb flickers without staying on. |
+  | Everything else | Furniture and decorations glow while the bulb remains dark. |
+  | Switch relocation | The wall switch moves to another part of the room. |
+  | Ghost intervention | A ghost appears and switches the control back. |
+  | Orientation failure | The room turns upside down. |
+  | Aquatic conversion | The bulb becomes a glowing fish. |
+
+- A rare normal-light result with a 3.5% selection chance.
+- A guaranteed normal-light result on every tenth attempt, lasting exactly three seconds before failure returns.
+- Finite state machine that permits only `idle → switching → active/normal → recovering → idle`.
+- Re-entry locking and cancellable operation tokens that prevent overlapping or stale transitions.
+- Attempt counter and ten-attempt progress indicator.
+- Generated sound effects using the Web Audio API—no downloaded audio files.
+- Sound and reset controls, plus keyboard shortcuts.
+- Responsive layout for desktop, tablet, and mobile screens.
+- Reduced-motion and increased-contrast support.
+- No cookies, analytics, local storage, tracking, or network requests.
+
+## Controls
+
+| Action | Mouse or touch | Keyboard |
+| --- | --- | --- |
+| Operate switch | Select the wall switch | Focus it and press <kbd>Space</kbd> or <kbd>Enter</kbd> |
+| Toggle sound | Select **Sound on/off** | Press <kbd>M</kbd> |
+| Reset room | Select **Reset room** | Press <kbd>R</kbd> |
+
+Browsers allow generated audio only after user interaction. The first switch or sound-control activation initializes the audio context.
+
+## Technology
+
+- **Structure:** HTML5 semantic elements
+- **Artwork:** Responsive inline SVG
+- **Presentation:** CSS custom properties, gradients, filters, media queries, and keyframe effects
+- **Logic:** Vanilla JavaScript with a finite state machine and guarded asynchronous transitions
+- **Audio:** Web Audio API oscillators and gain envelopes
+- **Tests:** Node.js built-in test runner, assertions, and VM sandbox
+- **Dependencies:** None
+
+## Project structure
+
+```text
+MoodSwitch/
+├── index.html              # Semantic interface and SVG room artwork
+├── style.css               # Layout, lighting, effects, and accessibility preferences
+├── script.js               # State machine, outcomes, controls, timers, and audio
+├── favicon.svg             # Local vector favicon
+├── scripts/
+│   └── verify.sh           # Complete production-readiness command
+├── tests/
+│   ├── room.test.cjs       # State-machine and outcome regression tests
+│   └── static.test.cjs     # DOM, ARIA, CSS, asset, and security checks
+├── AGENTS.md               # Project-specific development instructions
+├── .gitignore              # Secret, tooling, editor, and deployment exclusions
+└── README.md
+```
 
 ## Run locally
 
-No build step or dependencies are required.
+There is no installation or build step.
 
-1. Open `index.html` directly in a modern browser, or
-2. Serve the folder with any static web server, for example:
+### Option 1: Open directly
 
-   ```bash
-   python3 -m http.server 8080
-   ```
+Open `index.html` in a current browser.
 
-   Then visit `http://localhost:8080`.
+### Option 2: Use a static server
 
-## Verify
+From the project directory:
 
-The app has no runtime packages. The verification suite requires Node.js 18 or newer:
+```bash
+python3 -m http.server 8080
+```
+
+Then visit [http://localhost:8080](http://localhost:8080).
+
+### Clone the private repository
+
+GitHub access to the repository is required:
+
+```bash
+git clone https://github.com/SUDARSHANCHAUDHARI/MoodSwitch.git
+cd MoodSwitch
+```
+
+## Verification
+
+The website itself requires no tooling. Running the regression suite requires Node.js 18 or newer.
 
 ```bash
 ./scripts/verify.sh
 ```
 
-This checks JavaScript syntax, all random outcomes, transition locking, the tenth-attempt guarantee, reset cancellation, DOM/ARIA references, local asset references, and SVG well-formedness when `xmllint` is available.
+The verification command checks:
 
-## Interaction
+- JavaScript syntax.
+- All ten failure outcomes.
+- The rare normal-light branch.
+- Transition re-entry locking and recovery.
+- The exact three-second tenth-attempt guarantee.
+- Reset cancellation during pending work.
+- Required production files.
+- Unique DOM IDs and valid ARIA references.
+- JavaScript-to-DOM selector integrity.
+- Effect presentation hooks and reduced-motion coverage.
+- Remote runtime assets and unsafe HTML execution patterns.
+- Balanced CSS braces.
+- Inline SVG well-formedness when `xmllint` is available.
 
-- Click the wall switch or focus it and press <kbd>Space</kbd> / <kbd>Enter</kbd>.
-- Every ordinary attempt selects from ten failure effects plus a rare normal-light result.
-- Every tenth attempt forces the ceiling light to work normally for three seconds before it fails again.
-- Use **Sound** to enable or mute generated Web Audio effects.
-- Use **Reset room** or press <kbd>R</kbd> to clear attempts and cancel the active transition.
-- Press <kbd>M</kbd> to toggle sound.
+## Accessibility
 
-## Technical notes
+- The wall switch is a native `<button>` with standard keyboard behavior.
+- Visible focus indicators are provided for every interactive control.
+- Status changes are announced through a polite live region.
+- Decorative SVG elements do not compete with the scene description exposed to assistive technology.
+- `prefers-reduced-motion` replaces looping and moving effects with static visual states.
+- `prefers-contrast: more` strengthens borders and supporting text.
+- The bulb flicker remains below three flashes per second.
+- The interface includes a skip link to the primary switch control.
 
-- The room is a responsive inline SVG, while the wall switch is a native HTML button positioned over the same stage for reliable keyboard and screen-reader behavior.
-- A finite state machine allows only `idle → switching → active/normal → recovering → idle`, preventing overlapping effects from rapid input.
-- All sounds are generated at runtime with the Web Audio API. There are no audio, image, font, package, or network dependencies.
-- `prefers-reduced-motion` removes extended transitions and looping animation while preserving effect meaning.
-- Live status text announces effects without exposing decorative SVG shapes to assistive technology.
+## Privacy and security
 
-## Files
+MoodSwitch runs entirely in the browser and does not collect, transmit, or persist personal data.
 
-- `index.html` — semantic page structure and SVG room artwork
-- `style.css` — responsive scene styling, lighting, animation, and accessibility preferences
-- `script.js` — state machine, random outcomes, timers, controls, and generated sound
-- `.gitignore` — common local/editor exclusions
-- `favicon.svg` — local vector favicon
-- `tests/` — dependency-free state-machine and static regression checks
-- `scripts/verify.sh` — the main production-readiness command
+- No account or authentication system.
+- No analytics, advertising, trackers, or third-party scripts.
+- No cookies, local storage, session storage, or IndexedDB.
+- No API calls or external runtime assets.
+- No environment variables or embedded credentials.
+- No dynamic `innerHTML`, `eval`, or string-created executable code.
+- Generated audio begins only after a user gesture and can be muted at any time.
+
+The `.gitignore` excludes environment files, credentials, signing keys, local databases, hosting-provider state, editor files, caches, and generated local knowledge views.
 
 ## Browser support
 
-MoodSwitch targets current versions of Chrome, Edge, Firefox, and Safari. Browsers without Web Audio support still provide the complete visual experience.
+MoodSwitch targets current versions of Chrome, Edge, Firefox, and Safari. Browsers without Web Audio support still provide the complete visual experience without sound.
 
-## Deploy
+## Deployment
 
-MoodSwitch can be published to any static host. Deploy the repository root and serve `index.html` as the entry point. The app requires no environment variables, backend, rewrites, or remote assets.
+MoodSwitch can be deployed to any static host, including GitHub Pages, Cloudflare Pages, Netlify, Vercel, or a conventional web server.
 
-Before a release:
+Publish the repository root and serve `index.html` as the entry point. The app requires no environment variables, server functions, redirects, rewrites, or generated build directory.
+
+### Release checklist
 
 1. Run `./scripts/verify.sh`.
-2. Check the deployed page over HTTPS in the supported browsers.
-3. Confirm the switch is keyboard operable and sound starts only after user interaction.
-4. Keep the GitHub repository private until its visibility is intentionally changed.
+2. Confirm the Git working tree is clean and `main` matches `origin/main`.
+3. Deploy over HTTPS.
+4. Manually check the supported desktop and mobile browsers.
+5. Confirm keyboard operation, reduced-motion behavior, responsive layout, and user-initiated sound.
+6. Change repository visibility only through an intentional release decision.
 
-There is no automated deployment workflow. Adding or changing GitHub Actions requires explicit project approval.
+There is no automated deployment workflow. Adding or modifying GitHub Actions requires explicit project approval.
+
+## Author
+
+**Sudarshan Chaudhari**<br>
+Independent developer at **SudarshanTechLabs**<br>
+Bangkok, Thailand
+
+- GitHub: [@SUDARSHANCHAUDHARI](https://github.com/SUDARSHANCHAUDHARI)
+- Email: [sunny.sudarshan@gmail.com](mailto:sunny.sudarshan@gmail.com)
+
+## License and ownership
+
+Copyright © 2026 Sudarshan Chaudhari / SudarshanTechLabs. All rights reserved.
+
+This private repository does not currently include or grant an open-source license. Redistribution, modification, or publication requires explicit permission from the author.
