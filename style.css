@@ -526,7 +526,7 @@ footer {
   font-size: 0.66rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #66736e;
+  color: var(--paper);
 }
 
 footer p {

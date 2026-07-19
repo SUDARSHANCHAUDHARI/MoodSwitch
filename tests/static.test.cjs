@@ -73,3 +73,24 @@ test("CSS braces remain balanced", () => {
 
   assert.equal(balance, 0);
 });
+
+test("shared TinyChaos UI and footer contrast contracts remain intact", () => {
+  const sharedTokens = {
+    ink: "#15152a",
+    paper: "#fff5df",
+    coral: "#ff5d5d",
+    blue: "#4f7cff",
+    butter: "#ffd166",
+    mint: "#58d6a9",
+    lilac: "#b695ff",
+  };
+
+  Object.entries(sharedTokens).forEach(([token, value]) => {
+    assert.ok(css.includes(`--${token}: ${value};`), `Missing exact ${token} token`);
+  });
+  assert.match(html, /href="\.\.\/TinyChaos\/"/);
+  assert.match(html, /MoodSwitch by Sudarshan Chaudhari/);
+  assert.match(css, /a:focus-visible\s*\{[^}]*outline:\s*4px solid var\(--blue\)/s);
+  assert.match(css, /footer\s*\{[^}]*font-size:\s*0\.66rem;[^}]*color:\s*var\(--paper\)/s);
+  assert.doesNotMatch(css, /min-width:\s*320px/);
+});
