@@ -198,9 +198,9 @@ There is no automated deployment workflow. Adding or modifying GitHub Actions re
 
 ## License and ownership
 
-Copyright © 2026 Sudarshan Chaudhari / SudarshanTechLabs. All rights reserved.
+Copyright © 2026 Sudarshan Chaudhari / SudarshanTechLabs.
 
-This private repository does not currently include or grant an open-source license. Redistribution, modification, or publication requires explicit permission from the author.
+Released under the MIT License — see [LICENSE](LICENSE) for the full text.
 
 ---
 
