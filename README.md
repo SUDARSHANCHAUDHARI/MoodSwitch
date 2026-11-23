@@ -25,9 +25,9 @@ The project is built entirely with semantic HTML, CSS, inline SVG, and vanilla J
 ## Project status
 
 - **Readiness:** Production-ready static site
-- **Repository:** Private
+- **Repository:** Public
 - **Default branch:** `main`
-- **Deployment:** Not publicly deployed
+- **Deployment:** Live on GitHub Pages at <https://sudarshanchaudhari.github.io/MoodSwitch/>
 - **Runtime dependencies:** None
 - **Automated verification:** 11 dependency-free checks
 
@@ -117,9 +117,9 @@ python3 -m http.server 8080
 
 Then visit [http://localhost:8080](http://localhost:8080).
 
-### Clone the private repository
+### Clone the repository
 
-GitHub access to the repository is required:
+The repository is public, so no authentication is required:
 
 ```bash
 git clone https://github.com/SUDARSHANCHAUDHARI/MoodSwitch.git
@@ -192,7 +192,7 @@ Publish the repository root and serve `index.html` as the entry point. The app r
 3. Deploy over HTTPS.
 4. Manually check the supported desktop and mobile browsers.
 5. Confirm keyboard operation, reduced-motion behavior, responsive layout, and user-initiated sound.
-6. Change repository visibility only through an intentional release decision.
+6. The repository is already public with GitHub Pages live; any change of visibility is a deliberate release decision.
 
 There is no automated deployment workflow. Adding or modifying GitHub Actions requires explicit project approval.
 
